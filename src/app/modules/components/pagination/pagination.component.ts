@@ -26,22 +26,22 @@ export class PaginationComponent implements OnInit {
   ngOnInit(): void {
     this.paginationService.currentPage$.subscribe((page) => {
       this.currentPage = page;
-      // this.loadFinancas();
+      this.loadFinancas();
     });
   }
 
-  // loadFinancas(): void {
-  //   this.financasService
-  //     .findAll(this.currentPage, this.pageSize)
-  //     .subscribe((response) => {
-  //       this.financas = response.result || [];
-  //       this.totalPages = Math.ceil(response.count / this.pageSize);
-  //       this.pageNumbers = Array.from(
-  //         { length: this.totalPages },
-  //         (_, i) => i + 1
-  //       );
-  //     });
-  // }
+  loadFinancas(): void {
+    this.financasService
+      .findAll(this.currentPage, this.pageSize)
+      .subscribe((response) => {
+        this.financas = response.result || [];
+        this.totalPages = Math.ceil(response.count / this.pageSize);
+        this.pageNumbers = Array.from(
+          { length: this.totalPages },
+          (_, i) => i + 1
+        );
+      });
+  }
 
   goToPage(page: number): void {
     if (page > 0 && page <= this.totalPages && page !== this.currentPage) {
