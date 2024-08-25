@@ -9,7 +9,7 @@ import { Financas } from '../types/financas.type';
   providedIn: 'root',
 })
 export class FinancasService {
-  private apiUrl = 'http://127.0.0.1:8000/api/v1/financas/';
+  private apiUrl = 'http://127.0.0.1:8000/api/v1/financas';
   constructor(private http: HttpClient) {}
 
   // Criar Finanças

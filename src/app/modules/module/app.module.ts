@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HomeComponent } from '../home/home/home.component';
 import { ButtonComponent } from '../components/button/button.component';
 import { PaginationComponent } from '../components/pagination/pagination.component';
 import { ModalComponent } from '../components/modal/modal.component';
@@ -13,6 +12,8 @@ import { FlowbiteService } from '../service/flowbite.service';
 import { PaginationService } from '../service/pagination.service';
 import { ToggleComponent } from '../components/toggle/toggle.component';
 import { DesenvolvedorComponent } from '../pages/desenvolvedor/desenvolvedor.component';
+import { HomeComponent } from '../home/home.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [],
@@ -28,6 +29,7 @@ import { DesenvolvedorComponent } from '../pages/desenvolvedor/desenvolvedor.com
     GreetingsComponent,
     ToggleComponent,
     DesenvolvedorComponent,
+    FormsModule,
   ],
   exports: [
     HomeComponent,

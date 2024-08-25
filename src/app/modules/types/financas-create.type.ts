@@ -1,6 +1,6 @@
 export interface CreateFinancas {
   nome: string;
-  entradas: string;
-  saidas: string;
-  saldo: string;
+  entradas: number;
+  saidas: number;
+  saldo?: number;
 }
