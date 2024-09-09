@@ -1,1 +1,188 @@
-<p>list works!</p>
+<!-- Toast -->
+@if (success) {
+<div
+  class="p-4 text-center text-sm text-green-800 bg-green-50 dark:bg-gray-800 dark:text-green-400"
+  role="alert"
+>
+  <span class="font-medium">Finança atualizada com sucesso!</span> Em alguns
+  segundos a tabela será atualizada.
+</div>
+} @if (deletou) {
+<div
+  class="p-4 text-center text-sm text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400"
+  role="alert"
+>
+  <span class="font-medium">Finança deletada com sucesso!</span>.
+</div>
+}
+<!-- Table -->
+<div class="relative overflow-x-auto shadow-md">
+  <table
+    class="w-full text-sm py-5 text-left rtl:text-right text-gray-500 dark:text-gray-400"
+  >
+    <thead
+      class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+    >
+      <tr>
+        <th scope="col" class="px-6 py-3">Nome</th>
+        <th scope="col" class="px-6 py-3">Entrada</th>
+        <th scope="col" class="px-6 py-3">Saída</th>
+        <th scope="col" class="px-6 py-3">Saldo</th>
+        <th scope="col" class="px-6 py-3">Editar</th>
+        <th scope="col" class="px-6 py-3">Deletar</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (financa of financas; track financas) {
+
+      <tr
+        class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
+      >
+        <th
+          scope="row"
+          class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+        >
+          {{ financa.nome }}
+        </th>
+        <td class="px-6 py-4">{{ financa.entradas }}</td>
+        <td class="px-6 py-4">{{ financa.saidas }}</td>
+        <td class="px-6 py-4">{{ financa.saldo }}</td>
+        <td class="px-6 py-4">
+          <button
+            class="font-medium text-blue-600 hover:underline"
+            type="button"
+            (click)="openEditModal(financa)"
+          >
+            <svg
+              class="w-6 h-6"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"
+              />
+            </svg>
+          </button>
+        </td>
+        <td class="px-6 py-4">
+          <button
+            class="font-medium text-red-600 hover:underline"
+            type="button"
+            (click)="openDeleteModal(financa)"
+          >
+            <svg
+              class="w-6 h-6"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M8.586 2.586A2 2 0 0 1 10 2h4a2 2 0 0 1 2 2v2h3a1 1 0 1 1 0 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a1 1 0 0 1 0-2h3V4a2 2 0 0 1 .586-1.414ZM10 6h4V4h-4v2Zm1 4a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Zm4 0a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </button>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>
+<app-pagination />
+
+<!-- Modal para Editar Finança -->
+<app-modal [isOpen]="isEditModalOpen" (close)="closeEditModal()">
+  <h2 class="text-xl font-bold">Editar Finança</h2>
+  <form class="p-4 md:p-5" (ngSubmit)="UpdateFinancas()">
+    <div class="grid gap-4 mb-4 grid-cols-2">
+      <div class="col-span-2">
+        <label for="name" class="block mb-2 text-sm font-medium"
+          >Nome da Finança</label
+        >
+        <input
+          type="text"
+          name="name"
+          id="name"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:focus:ring-primary-500 dark:focus:border-primary-500"
+          required=""
+          [(ngModel)]="financasToUpdate.nome"
+        />
+      </div>
+      <div class="col-span-2 sm:col-span-1">
+        <label for="entradas" class="block mb-2 text-sm font-medium"
+          >Entradas</label
+        >
+        <input
+          type="number"
+          name="entradas"
+          id="entradas"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:focus:ring-primary-500 dark:focus:border-primary-500"
+          placeholder="Ex: 250"
+          required=""
+          [(ngModel)]="financasToUpdate.entradas"
+        />
+      </div>
+
+      <div class="col-span-2 sm:col-span-1">
+        <label for="saidas" class="block mb-2 text-sm font-medium"
+          >Saídas</label
+        >
+        <input
+          type="number"
+          name="saidas"
+          id="saidas"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:focus:ring-primary-500 dark:focus:border-primary-500"
+          required=""
+          [(ngModel)]="financasToUpdate.saidas"
+        />
+      </div>
+    </div>
+    <button
+      type="submit"
+      class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+    >
+      Atualizar
+    </button>
+  </form>
+</app-modal>
+
+<!-- Modal para Confirmar Exclusão -->
+<app-modal
+  [isOpen]="isDeleteModalOpen"
+  (close)="closeDeleteModal()"
+  class="bg-white dark:bg-gray-900"
+>
+  <h2 class="text-xl font-bold">Confirmar Exclusão</h2>
+  <p class="mt-4">
+    Você tem certeza de que deseja excluir a finança "<strong>{{
+      financasToDelete?.nome
+    }}</strong
+    >"?
+  </p>
+  <div class="flex justify-end mt-4">
+    <button
+      (click)="confirmDelete()"
+      class="px-4 py-2 bg-red-500 text-white rounded-lg mr-2"
+    >
+      Excluir
+    </button>
+    <button
+      (click)="closeDeleteModal()"
+      class="px-4 py-2 bg-gray-500 text-white rounded-lg"
+    >
+      Cancelar
+    </button>
+  </div>
+</app-modal>

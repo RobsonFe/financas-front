@@ -14,6 +14,7 @@ import { ToggleComponent } from '../components/toggle/toggle.component';
 import { DesenvolvedorComponent } from '../pages/desenvolvedor/desenvolvedor.component';
 import { HomeComponent } from '../home/home.component';
 import { FormsModule } from '@angular/forms';
+import { ListComponent } from '../components/list/list.component';
 
 @NgModule({
   declarations: [],
@@ -30,6 +31,7 @@ import { FormsModule } from '@angular/forms';
     ToggleComponent,
     DesenvolvedorComponent,
     FormsModule,
+    ListComponent,
   ],
   exports: [
     HomeComponent,
@@ -42,7 +44,8 @@ import { FormsModule } from '@angular/forms';
     GreetingsComponent,
     ToggleComponent,
     DesenvolvedorComponent,
+    ListComponent,
   ],
   providers: [FinancasService, FlowbiteService, PaginationService],
 })
-export class AppModule {}
+export class SharedModule {}
