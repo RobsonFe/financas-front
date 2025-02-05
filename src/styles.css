@@ -3,6 +3,43 @@
 @tailwind components;
 @tailwind utilities;
 
+/* CSS Reset */
 * {
-  background-color: "#f8f9fa";
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  background-color: #f8f9fa; /* Light background */
+  color: #212121; /* Light text color */
+}
+
+body.dark {
+  background-color: #212529; /* Dark background */
+  color: white; /* Dark text color */
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
 }

@@ -1,25 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { SharedModule } from './modules/shared/shared.module';
-import { initFlowbite } from 'flowbite';
-import { FlowbiteService } from './modules/service/flowbite.service';
-import { PaginationService } from './modules/service/pagination.service';
-import { FinancasService } from './modules/service/financas.service';
-import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { Component, OnInit } from "@angular/core"
+import { RouterOutlet } from "@angular/router"
+import { SharedModule } from "./modules/shared/shared.module"
+import { initFlowbite } from "flowbite"
+import { FlowbiteService } from "./modules/service/flowbite.service"
+import { PaginationService } from "./modules/service/pagination.service"
+import { FinancasService } from "./modules/service/financas.service"
+import { HttpClientModule } from "@angular/common/http"
+import { FormsModule } from "@angular/forms"
 
 @Component({
-  selector: 'app-root',
+  selector: "app-root",
   standalone: true,
   imports: [RouterOutlet, SharedModule, HttpClientModule, FormsModule],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
+  templateUrl: "./app.component.html",
+  styleUrl: "./app.component.css",
   providers: [FlowbiteService, FinancasService, PaginationService],
 })
 export class AppComponent implements OnInit {
-  title = 'financas-front';
+  title = "Financas-App"
 
   ngOnInit(): void {
-    initFlowbite();
+    initFlowbite()
   }
 }
